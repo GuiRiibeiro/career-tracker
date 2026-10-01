@@ -292,10 +292,45 @@ input, select {
     font-size: 0.75rem;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: underline;
+    text-decoration: none;
     transition: color 0.2s;
 }
 
 .btn-clear:hover {
     color: var(--relegated); /* Fica vermelho ao passar o mouse */
+}
+
+/* Cards de Estatísticas */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.stat-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    text-align: center;
+    border-top: 4px solid var(--primary-color);
+}
+
+.stat-card.my-team-card {
+    border-top: 4px solid var(--promoted); /* Destaque verde para o seu time */
+}
+
+.stat-card h3 {
+    font-size: 0.95rem;
+    color: #666;
+    margin-bottom: 0.8rem;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+.stat-card .stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
 }

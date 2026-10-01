@@ -11,9 +11,15 @@
         <div class="header-title">
             <h1>LEAGUE <span>TWO</span></h1>
         </div>
+        <!-- Esta navegação havia sido apagada acidentalmente -->
+        <nav>
+            <button class="tab-btn active" data-target="view-table">Tabela & Jogos</button>
+            <button class="tab-btn" data-target="view-stats">Estatísticas</button>
+        </nav>
     </header>
 
     <main>
+        <!-- Aba: Tabela + Jogos -->
         <section id="view-table" class="view-section active">
             <div class="layout-grid">
                 
@@ -35,6 +41,12 @@
                         <div class="legend-item"><span class="color-box playoffs"></span> Playoffs</div>
                         <div class="legend-item"><span class="color-box relegated"></span> Despromoção</div>
                     </div>
+
+                    <div class="data-actions">
+                        <button id="btn-export">Exportar JSON</button>
+                        <input type="file" id="input-import" accept=".json" hidden>
+                        <button id="btn-import">Importar JSON</button>
+                    </div>
                 </div>
 
                 <!-- Coluna Direita: Jogos da Rodada -->
@@ -53,6 +65,24 @@
                         <!-- Renderizado via JS -->
                     </div>
                 </div>
+            </div>
+        </section>
+
+        <!-- Aba: Estatísticas -->
+        <section id="view-stats" class="view-section">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h2>Estatísticas Gerais</h2>
+                <div class="form-group" style="display: flex; align-items: center; gap: 1rem;">
+                    <label for="my-team-select"><strong>Seu time na carreira:</strong></label>
+                    <select id="my-team-select" style="width: 250px;">
+                        <option value="">Nenhum selecionado</option>
+                        <!-- Preenchido via JS -->
+                    </select>
+                </div>
+            </div>
+            
+            <div id="stats-container" class="stats-grid">
+                <!-- Renderizado via JS -->
             </div>
         </section>
     </main>
