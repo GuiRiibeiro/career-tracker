@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap');
+
+:root {
+    --primary-color: #510a8b; /* Roxo escuro do cabeçalho da tabela */
+    --text-dark: #333;
+    --bg-color: #f4f4f9;
+    --promoted: #00c4b5; /* Ciano/Verde claro */
+    --playoffs: #3b82f6; /* Azul */
+    --relegated: #ef4444; /* Vermelho */
+    --border-color: #e5e5e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-dark);
+    padding-bottom: 3rem;
+}
+
+/* Cabeçalho */
+header {
+    text-align: center;
+    padding: 2.5rem 1rem 1.5rem;
+}
+
+.header-title h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+}
+
+.header-title h1 span {
+    color: var(--primary-color);
+}
+
+/* Abas de Navegação */
+nav {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.tab-btn {
+    padding: 0.6rem 1.5rem;
+    border: 2px solid var(--primary-color);
+    background: transparent;
+    color: var(--primary-color);
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background: var(--primary-color);
+    color: #fff;
+}
+
+/* Controle das Seções */
+.view-section {
+    display: none;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1rem;
+}
+
+.view-section.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Tabela */
+.table-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+thead th {
+    background-color: var(--primary-color);
+    color: #fff;
+    padding: 1rem 0.5rem;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.col-clube {
+    text-align: left;
+    width: 35%;
+}
+
+tbody td {
+    padding: 0.9rem 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+tbody td:nth-child(2) {
+    text-align: left;
+    color: #444;
+}
+
+/* Cores das faixas de classificação na Tabela */
+tbody tr.pos-promoted td:first-child { color: var(--promoted); font-weight: 800; }
+tbody tr.pos-playoffs td:first-child { color: var(--playoffs); font-weight: 800; }
+tbody tr.pos-relegated td:first-child { color: var(--relegated); font-weight: 800; }
+
+/* Forma Recente (Bolinhas) */
+.form-balls {
+    display: flex;
+    gap: 4px;
+    justify-content: center;
+}
+.form-ball {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    display: inline-block;
+}
+.form-w { background-color: #22c55e; } /* Verde - Vitória */
+.form-d { background-color: #94a3b8; } /* Cinza - Empate */
+.form-l { background-color: #ef4444; } /* Vermelho - Derrota */
+
+/* Legenda */
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #666;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.color-box {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.color-box.promoted { background-color: var(--promoted); }
+.color-box.playoffs { background-color: var(--playoffs); }
+.color-box.relegated { background-color: var(--relegated); }
+
+/* Formulários e Botões Gerais */
+.card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    margin-bottom: 2rem;
+}
+
+h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-color);
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.match-inputs {
+    display: flex;
+    gap: 0.8rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+input, select {
+    padding: 0.6rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 0.95rem;
+}
+
+input[type="number"] { width: 80px; }
+
+.btn-primary, #btn-export, #btn-import {
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+
+.btn-primary:hover, #btn-export:hover, #btn-import:hover {
+    background-color: #3b0766;
+}
+
+.data-actions {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+}
