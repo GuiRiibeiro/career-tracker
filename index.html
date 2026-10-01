@@ -11,84 +11,51 @@
         <div class="header-title">
             <h1>LEAGUE <span>TWO</span></h1>
         </div>
-        <nav>
-            <button class="tab-btn active" data-target="view-table">Tabela</button>
-            <button class="tab-btn" data-target="view-matches">Jogos</button>
-            <button class="tab-btn" data-target="view-stats">Estatísticas</button>
-        </nav>
     </header>
 
     <main>
-        <!-- Aba: Tabela de Classificação -->
         <section id="view-table" class="view-section active">
-            <div class="table-container">
-                <table id="league-table">
-                    <thead>
-                        <tr>
-                            <th>POS</th>
-                            <th class="col-clube">CLUBE</th>
-                            <th>J</th>
-                            <th>V</th>
-                            <th>E</th>
-                            <th>D</th>
-                            <th>GP</th>
-                            <th>GC</th>
-                            <th>SG</th>
-                            <th>PTS</th>
-                            <th>FORMA</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Renderizado via JavaScript -->
-                    </tbody>
-                </table>
-            </div>
-            
-            <div class="legend">
-                <div class="legend-item"><span class="color-box promoted"></span> Promovido - League One</div>
-                <div class="legend-item"><span class="color-box playoffs"></span> Qualificado - League Two Playoffs</div>
-                <div class="legend-item"><span class="color-box relegated"></span> Despromoção - National League</div>
-            </div>
-
-            <div class="data-actions">
-                <button id="btn-export">Exportar JSON</button>
-                <input type="file" id="input-import" accept=".json" hidden>
-                <button id="btn-import">Importar JSON</button>
-            </div>
-        </section>
-
-        <!-- Aba: Cadastro de Jogos -->
-        <section id="view-matches" class="view-section hidden">
-            <h2>Registrar Jogo</h2>
-            <form id="match-form" class="card">
-                <div class="form-group">
-                    <input type="number" id="match-round" placeholder="Rodada" required min="1" max="46">
+            <div class="layout-grid">
+                
+                <!-- Coluna Esquerda: Tabela -->
+                <div class="left-col">
+                    <div class="table-container">
+                        <table id="league-table">
+                            <thead>
+                                <tr>
+                                    <th>POS</th><th class="col-clube">CLUBE</th>
+                                    <th>J</th><th>V</th><th>E</th><th>D</th><th>GP</th><th>GC</th><th>SG</th><th>PTS</th><th>FORMA</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    </div>
+                    <div class="legend">
+                        <div class="legend-item"><span class="color-box promoted"></span> Promovido</div>
+                        <div class="legend-item"><span class="color-box playoffs"></span> Playoffs</div>
+                        <div class="legend-item"><span class="color-box relegated"></span> Despromoção</div>
+                    </div>
                 </div>
-                <div class="form-group match-inputs">
-                    <select id="home-team" required><option value="">Mandante</option></select>
-                    <input type="number" id="home-score" placeholder="Gols" required min="0">
-                    <span>X</span>
-                    <input type="number" id="away-score" placeholder="Gols" required min="0">
-                    <select id="away-team" required><option value="">Visitante</option></select>
+
+                <!-- Coluna Direita: Jogos da Rodada -->
+                <div class="right-col card">
+                    <div class="round-nav">
+                        <button id="btn-prev" class="btn-primary btn-icon">&lt;</button>
+                        <h2 id="round-title" style="margin: 0;">RODADA 01</h2>
+                        <button id="btn-next" class="btn-primary btn-icon">&gt;</button>
+                    </div>
+                    
+                    <div class="clear-round-container">
+                        <button id="btn-clear-round" class="btn-clear">Limpar placares desta rodada</button>
+                    </div>
+                    
+                    <div id="matches-list" class="matches-list-grid">
+                        <!-- Renderizado via JS -->
+                    </div>
                 </div>
-                <button type="submit" class="btn-primary">Salvar Jogo</button>
-            </form>
-
-            <h2>Últimos Jogos</h2>
-            <div id="matches-list" class="matches-list">
-                <!-- Renderizado via JavaScript -->
-            </div>
-        </section>
-
-        <!-- Aba: Estatísticas -->
-        <section id="view-stats" class="view-section hidden">
-            <div id="stats-container" class="stats-grid">
-                <!-- Renderizado via JavaScript -->
             </div>
         </section>
     </main>
-
-    <!-- Usando type="module" para suportar import/export no JS -->
     <script type="module" src="js/main.js"></script>
 </body>
 </html>

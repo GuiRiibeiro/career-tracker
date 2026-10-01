@@ -1,40 +1,36 @@
-// Lista inicial de times baseada no seu rascunho
 const initialTeams = [
-    "Accrington", "Barnet", "Bristol Rovers", "Cheltenham", "Chesterfield",
-    "Colchester", "Crawley", "Crewe", "Exeter City", "Fleetwood",
-    "Gillingham", "Grimsby Town", "Newport County", "Northampton", "Oldham Athletic",
-    "Port Vale", "Rochdale AFC", "Rotherham", "Salford City", "Shrewsburry",
-    "Swindon Town", "Tranmere Rovers", "Walsall", "York City"
+    { name: "Accrington", abbr: "ACC" }, { name: "Barnet", abbr: "BAR" },
+    { name: "Bristol Rovers", abbr: "BRR" }, { name: "Cheltenham", abbr: "CHE" },
+    { name: "Chesterfield", abbr: "CHF" }, { name: "Colchester", abbr: "COL" },
+    { name: "Crawley", abbr: "CRA" }, { name: "Crewe", abbr: "CRE" },
+    { name: "Exeter City", abbr: "EXE" }, { name: "Fleetwood", abbr: "FLE" },
+    { name: "Gillingham", abbr: "GIL" }, { name: "Grimsby Town", abbr: "GRI" },
+    { name: "Newport County", abbr: "NWP" }, { name: "Northampton", abbr: "NOR" },
+    { name: "Oldham Athletic", abbr: "OLD" }, { name: "Port Vale", abbr: "PTV" },
+    { name: "Rochdale AFC", abbr: "ROC" }, { name: "Rotherham", abbr: "ROT" },
+    { name: "Salford City", abbr: "SAL" }, { name: "Shrewsbury", abbr: "SHR" },
+    { name: "Swindon Town", abbr: "SWI" }, { name: "Tranmere Rovers", abbr: "TRA" },
+    { name: "Walsall", abbr: "WAL" }, { name: "York City", abbr: "YOR" }
 ];
 
-// Carrega os dados do localStorage ou cria a estrutura do zero
 export function loadData() {
-    const savedData = localStorage.getItem('eafc26_career_data');
+    let savedData = localStorage.getItem('eafc26_career_data');
     if (savedData) {
-        return JSON.parse(savedData);
+        let parsedData = JSON.parse(savedData);
+        // Migração ou inicialização de results
+        if (!parsedData.results) parsedData.results = {};
+        return parsedData;
     }
 
-    // Estrutura inicial se for o primeiro acesso
     const data = {
-        teams: initialTeams.map(name => ({
-            name: name,
-            played: 0,
-            win: 0,
-            draw: 0,
-            loss: 0,
-            goalsFor: 0,
-            goalsAgainst: 0,
-            points: 0,
-            form: [] // Array para guardar os últimos resultados, ex: ['W', 'D', 'L']
-        })),
-        matches: []
+        teams: initialTeams.map(t => ({ name: t.name, abbr: t.abbr })),
+        results: {} // Guarda placares { "ACC_YOR": { h: 1, a: 0 } }
     };
     
     saveData(data);
     return data;
 }
 
-// Salva os dados no localStorage
 export function saveData(data) {
     localStorage.setItem('eafc26_career_data', JSON.stringify(data));
 }
