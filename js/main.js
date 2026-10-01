@@ -2,6 +2,8 @@ import { loadData, saveData } from './data.js';
 import { renderTable, initMatchesUI } from './ui.js';
 import { schedule } from './schedule.js';
 import { renderStats } from './stats.js';
+import { initPlayoffs } from './playoffs.js';
+import { renderHistory } from './history.js'; // NOVO IMPORT
 
 let appData;
 
@@ -9,6 +11,8 @@ function init() {
     appData = loadData();
     renderTable(appData, schedule);
     initMatchesUI(appData, schedule);
+    initPlayoffs(appData, schedule);
+    renderHistory(appData); // NOVO
     setupExportImport();
     setupTabs();
 }
@@ -16,23 +20,17 @@ function init() {
 function setupTabs() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.addEventListener('click', (e) => {
-            // Remove active de todos
             document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
             document.querySelectorAll('.view-section').forEach(s => s.classList.remove('active'));
             
-            // Adiciona active no clicado
             const targetId = e.target.getAttribute('data-target');
             e.target.classList.add('active');
             document.getElementById(targetId).classList.add('active');
 
-            // Renderiza estatísticas na hora caso clique na aba
-            if (targetId === 'view-stats') {
-                renderStats(appData, schedule);
-            }
+            if (targetId === 'view-stats') renderStats(appData, schedule);
         });
     });
 
-    // Salva a preferência de time e recarrega as estatísticas
     document.getElementById('my-team-select').addEventListener('change', (e) => {
         appData.myTeam = e.target.value;
         saveData(appData);
@@ -44,7 +42,6 @@ function setupExportImport() {
     document.getElementById('btn-export').addEventListener('click', () => {
         const dataStr = localStorage.getItem('eafc26_career_data');
         if (!dataStr) return alert("Nenhum dado para exportar.");
-
         const blob = new Blob([dataStr], { type: "application/json" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement('a');
@@ -57,14 +54,11 @@ function setupExportImport() {
     });
 
     const fileInput = document.getElementById('input-import');
-    document.getElementById('btn-import').addEventListener('click', () => {
-        fileInput.click();
-    });
+    document.getElementById('btn-import').addEventListener('click', () => fileInput.click());
 
     fileInput.addEventListener('change', (event) => {
         const file = event.target.files[0];
         if (!file) return;
-
         const reader = new FileReader();
         reader.onload = (e) => {
             try {

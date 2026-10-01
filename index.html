@@ -10,11 +10,13 @@
     <header>
         <div class="header-title">
             <h1>LEAGUE <span>TWO</span></h1>
+            <p id="season-display" style="color: #666; font-weight: 700; margin-top: 0.5rem;">TEMPORADA 1</p>
         </div>
-        <!-- Esta navegação havia sido apagada acidentalmente -->
         <nav>
             <button class="tab-btn active" data-target="view-table">Tabela & Jogos</button>
+            <button class="tab-btn" data-target="view-playoffs">Playoffs</button>
             <button class="tab-btn" data-target="view-stats">Estatísticas</button>
+            <button class="tab-btn" data-target="view-history">Histórico</button>
         </nav>
     </header>
 
@@ -22,8 +24,6 @@
         <!-- Aba: Tabela + Jogos -->
         <section id="view-table" class="view-section active">
             <div class="layout-grid">
-                
-                <!-- Coluna Esquerda: Tabela -->
                 <div class="left-col">
                     <div class="table-container">
                         <table id="league-table">
@@ -42,48 +42,50 @@
                         <div class="legend-item"><span class="color-box relegated"></span> Despromoção</div>
                     </div>
 
-                    <div class="data-actions">
+                    <div class="data-actions" style="flex-wrap: wrap;">
                         <button id="btn-export">Exportar JSON</button>
                         <input type="file" id="input-import" accept=".json" hidden>
                         <button id="btn-import">Importar JSON</button>
+                        <button id="btn-end-season" style="background-color: #eab308; color: #000; margin-left: auto;">Fim dos Pontos Corridos</button>
                     </div>
                 </div>
 
-                <!-- Coluna Direita: Jogos da Rodada -->
                 <div class="right-col card">
                     <div class="round-nav">
                         <button id="btn-prev" class="btn-primary btn-icon">&lt;</button>
                         <h2 id="round-title" style="margin: 0;">RODADA 01</h2>
                         <button id="btn-next" class="btn-primary btn-icon">&gt;</button>
                     </div>
-                    
                     <div class="clear-round-container">
                         <button id="btn-clear-round" class="btn-clear">Limpar placares desta rodada</button>
                     </div>
-                    
-                    <div id="matches-list" class="matches-list-grid">
-                        <!-- Renderizado via JS -->
-                    </div>
+                    <div id="matches-list" class="matches-list-grid"></div>
                 </div>
             </div>
         </section>
 
+        <!-- Aba: Playoffs -->
+        <section id="view-playoffs" class="view-section hidden">
+            <div id="playoffs-container"></div>
+        </section>
+
         <!-- Aba: Estatísticas -->
-        <section id="view-stats" class="view-section">
+        <section id="view-stats" class="view-section hidden">
             <div class="card" style="margin-bottom: 2rem;">
-                <h2>Estatísticas Gerais</h2>
+                <h2>Estatísticas Gerais da Temporada</h2>
                 <div class="form-group" style="display: flex; align-items: center; gap: 1rem;">
                     <label for="my-team-select"><strong>Seu time na carreira:</strong></label>
                     <select id="my-team-select" style="width: 250px;">
                         <option value="">Nenhum selecionado</option>
-                        <!-- Preenchido via JS -->
                     </select>
                 </div>
             </div>
-            
-            <div id="stats-container" class="stats-grid">
-                <!-- Renderizado via JS -->
-            </div>
+            <div id="stats-container" class="stats-grid"></div>
+        </section>
+
+        <!-- Aba: Histórico de Temporadas -->
+        <section id="view-history" class="view-section hidden">
+            <div id="history-container" class="stats-grid"></div>
         </section>
     </main>
     <script type="module" src="js/main.js"></script>

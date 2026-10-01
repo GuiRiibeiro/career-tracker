@@ -22,7 +22,12 @@ export function renderTable(appData, schedule) {
 
         tr.innerHTML = `
             <td>${pos}</td>
-            <td class="col-clube">${team.name}</td>
+            <td class="col-clube">
+                <div class="team-name-cell">
+                    <img src="img/leaguetwo/${team.abbr}.png" alt="${team.abbr}" class="team-badge-table" onerror="this.style.display='none'">
+                    <span>${team.name}</span>
+                </div>
+            </td>
             <td>${team.played}</td>
             <td>${team.win}</td>
             <td>${team.draw}</td>
@@ -44,7 +49,6 @@ export function initMatchesUI(appData, schedule) {
     document.getElementById('btn-prev').addEventListener('click', () => changeRound(-1));
     document.getElementById('btn-next').addEventListener('click', () => changeRound(1));
 
-    // Novo evento: Limpar rodada
     document.getElementById('btn-clear-round').addEventListener('click', () => {
         if (confirm(`Tem certeza que deseja limpar todos os placares da Rodada ${currentRound}?`)) {
             const matches = schedule.filter(m => m.round === currentRound);
@@ -75,11 +79,13 @@ export function initMatchesUI(appData, schedule) {
             const div = document.createElement('div');
             div.className = 'match-row';
             div.innerHTML = `
+                <img src="img/leaguetwo/${match.home}.png" alt="${match.home}" class="team-badge-match" onerror="this.style.display='none'">
                 <span class="team-abbr">${match.home}</span>
                 <input type="number" min="0" class="score-input home-score" data-id="${match.id}" data-type="h" value="${result.h}">
                 <span class="vs">X</span>
                 <input type="number" min="0" class="score-input away-score" data-id="${match.id}" data-type="a" value="${result.a}">
                 <span class="team-abbr">${match.away}</span>
+                <img src="img/leaguetwo/${match.away}.png" alt="${match.away}" class="team-badge-match" onerror="this.style.display='none'">
             `;
             container.appendChild(div);
         });

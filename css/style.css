@@ -334,3 +334,170 @@ input, select {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
 }
+
+/* Escudos dos Times */
+.team-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.team-badge-table {
+    width: 24px;
+    height: 24px;
+    object-fit: contain;
+}
+
+.team-badge-match {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+}
+
+/* Playoffs Bracket */
+.bracket {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+    align-items: stretch; /* Alinha as colunas para o truque das linhas funcionar */
+}
+
+.bracket-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    flex: 1;
+    min-width: 300px;
+    justify-content: center;
+    position: relative;
+}
+
+/* Linhas de conexão (Aparecem apenas no Desktop) */
+@media (min-width: 768px) {
+    .bracket-col.semis::after {
+        content: "";
+        position: absolute;
+        top: 25%;
+        bottom: 25%;
+        right: -1rem;
+        width: 1rem;
+        border-top: 2px solid var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+        border-right: 2px solid var(--primary-color);
+        border-radius: 0 6px 6px 0;
+        z-index: 0;
+    }
+    
+    .bracket-col.final::before {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 50%;
+        width: 1rem;
+        height: 2px;
+        background: var(--primary-color);
+        z-index: 0;
+    }
+}
+
+.matchup {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    position: relative;
+    z-index: 1; /* Mantém os cards acima das linhas de conexão */
+}
+
+.matchup h4 {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.team-slot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Separa o time do input de placar */
+    padding: 0.6rem 0.8rem;
+    background: var(--bg-color);
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #eee;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.team-slot:last-child { margin-bottom: 0; }
+
+.pending-team {
+    color: #999;
+    font-style: italic;
+    justify-content: center;
+}
+
+/* Input exclusivo do mata-mata */
+.po-input {
+    width: 40px;
+    text-align: center;
+    padding: 0.3rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+/* Estilos para Playoffs Avançados e Histórico */
+.po-scores {
+    display: flex;
+    gap: 0.3rem;
+    align-items: center;
+}
+
+.po-scores span {
+    font-size: 0.7rem;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.po-agg {
+    width: 35px;
+    text-align: center;
+    font-weight: 800;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 4px;
+    padding: 0.3rem 0;
+    margin-left: 0.5rem;
+}
+
+.champion-banner {
+    background: linear-gradient(135deg, #eab308, #ca8a04);
+    color: #fff;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+    box-shadow: 0 10px 25px rgba(234, 179, 8, 0.3);
+    animation: fadeIn 0.5s ease-out;
+}
+
+.champion-banner h2 { color: #fff; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.champion-banner p { font-size: 1.2rem; font-weight: 600; margin-bottom: 1.5rem; }
+
+.history-card {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-top: 4px solid var(--primary-color);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.history-card h3 { color: var(--primary-color); margin-bottom: 1rem; border-bottom: 1px solid #eee; padding-bottom: 0.5rem; }
+.history-list { list-style: none; }
+.history-list li { padding: 0.5rem 0; border-bottom: 1px dashed #eee; display: flex; justify-content: space-between;}
