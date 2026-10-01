@@ -18,15 +18,23 @@ export function loadData() {
     if (savedData) {
         let parsedData = JSON.parse(savedData);
         
-        // Migração para Suporte a Temporadas e Ida/Volta
         if (!parsedData.currentSeason) parsedData.currentSeason = 1;
         if (!parsedData.history) parsedData.history = [];
-        if (!parsedData.playoffResults || typeof parsedData.playoffResults.sf1.t1_ida === 'undefined') {
+        
+        if (!parsedData.playoffResults) {
             parsedData.playoffResults = {
-                sf1: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '' },
-                sf2: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '' },
-                final: { t1: '', t2: '' }
+                sf1: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '', t1_pk: '', t2_pk: '' },
+                sf2: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '', t1_pk: '', t2_pk: '' },
+                final: { t1: '', t2: '', t1_pk: '', t2_pk: '' }
             };
+        } else {
+            // Migração: se já tiver o save antigo, injeta as variáveis de penalti
+            ['sf1', 'sf2', 'final'].forEach(match => {
+                if (typeof parsedData.playoffResults[match].t1_pk === 'undefined') {
+                    parsedData.playoffResults[match].t1_pk = '';
+                    parsedData.playoffResults[match].t2_pk = '';
+                }
+            });
         }
         
         parsedData.teams = parsedData.teams.map(t => {
@@ -45,9 +53,9 @@ export function loadData() {
         currentSeason: 1,
         history: [],
         playoffResults: {
-            sf1: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '' },
-            sf2: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '' },
-            final: { t1: '', t2: '' }
+            sf1: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '', t1_pk: '', t2_pk: '' },
+            sf2: { t1_ida: '', t2_ida: '', t1_volta: '', t2_volta: '', t1_pk: '', t2_pk: '' },
+            final: { t1: '', t2: '', t1_pk: '', t2_pk: '' }
         }
     };
     
