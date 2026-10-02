@@ -546,3 +546,30 @@ input, select {
     background-color: #fff !important;
     border-color: #eab308 !important;
 }
+
+/* Botão de Fim de Temporada */
+#btn-end-season {
+    background-color: #eab308;
+    color: #000;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 700;
+    margin-left: auto; /* Empurra para o canto direito */
+    transition: filter 0.2s;
+}
+
+#btn-end-season:hover {
+    filter: brightness(0.9); /* Escurece levemente no hover, servindo para o amarelo e para o vermelho */
+}
+
+/* Destaque para o Seu Time na Tabela */
+.my-team-row {
+    background-color: #f3e8ff !important; /* Fundo roxo muito clarinho */
+}
+
+.my-team-row .col-clube span {
+    font-weight: 800;
+    color: var(--primary-color);
+}

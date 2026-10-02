@@ -3,7 +3,7 @@ import { renderTable, initMatchesUI } from './ui.js';
 import { schedule } from './schedule.js';
 import { renderStats } from './stats.js';
 import { initPlayoffs } from './playoffs.js';
-import { renderHistory } from './history.js'; // NOVO IMPORT
+import { renderHistory } from './history.js';
 
 let appData;
 
@@ -12,7 +12,7 @@ function init() {
     renderTable(appData, schedule);
     initMatchesUI(appData, schedule);
     initPlayoffs(appData, schedule);
-    renderHistory(appData); // NOVO
+    renderHistory(appData);
     setupExportImport();
     setupTabs();
 }
@@ -35,6 +35,7 @@ function setupTabs() {
         appData.myTeam = e.target.value;
         saveData(appData);
         renderStats(appData, schedule);
+        renderTable(appData, schedule);
     });
 }
 

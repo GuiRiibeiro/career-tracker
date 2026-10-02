@@ -17,6 +17,11 @@ export function renderTable(appData, schedule) {
         else if (pos >= 4 && pos <= 7) tr.classList.add('pos-playoffs');
         else if (pos >= 23) tr.classList.add('pos-relegated');
 
+        // NOVO: Adiciona a classe de destaque se for o seu time escolhido
+        if (appData.myTeam && team.abbr === appData.myTeam) {
+            tr.classList.add('my-team-row');
+        }
+
         const sg = calculateGoalDifference(team.goalsFor, team.goalsAgainst);
         const formHtml = team.form.map(r => `<span class="form-ball form-${r.toLowerCase()}"></span>`).join('');
 
@@ -49,17 +54,20 @@ export function initMatchesUI(appData, schedule) {
     document.getElementById('btn-prev').addEventListener('click', () => changeRound(-1));
     document.getElementById('btn-next').addEventListener('click', () => changeRound(1));
 
-    document.getElementById('btn-clear-round').addEventListener('click', () => {
-        if (confirm(`Tem certeza que deseja limpar todos os placares da Rodada ${currentRound}?`)) {
-            const matches = schedule.filter(m => m.round === currentRound);
-            matches.forEach(match => {
-                delete appData.results[match.id];
-            });
-            saveData(appData);
-            renderTable(appData, schedule);
-            renderMatches();
-        }
-    });
+    const btnClearRound = document.getElementById('btn-clear-round');
+    if (btnClearRound) {
+        btnClearRound.addEventListener('click', () => {
+            if (confirm(`Tem certeza que deseja limpar todos os placares da Rodada ${currentRound}?`)) {
+                const matches = schedule.filter(m => m.round === currentRound);
+                matches.forEach(match => {
+                    delete appData.results[match.id];
+                });
+                saveData(appData);
+                renderTable(appData, schedule);
+                renderMatches();
+            }
+        });
+    }
 
     function changeRound(delta) {
         currentRound += delta;
